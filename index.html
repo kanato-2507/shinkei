@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>神経衰弱（イラスト版）</title>
+    <meta name="theme-color" content="#146b3a" />
+    <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml" />
+    <!-- PNG系はJSで動的生成（互換目的）。必要なら実ファイルも追加可能 -->
+    <link rel="icon" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" sizes="180x180" type="image/png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="app">
+      <!-- Start Screen -->
+      <section id="start-screen" class="screen active" aria-label="開始画面">
+        <h1 class="title">神経衰弱</h1>
+        <button id="start-btn" class="btn primary" aria-label="ゲーム開始">スタート</button>
+      </section>
+
+      <!-- Game Screen -->
+      <section id="game-screen" class="screen" aria-label="ゲーム画面" hidden>
+        <header class="hud" aria-live="polite">
+          <div class="turn">手番: <span id="current-player">プレイヤー1</span></div>
+          <div class="scores">
+            <span>プレイヤー1: <strong id="score-p1">0</strong></span>
+            <span>プレイヤー2: <strong id="score-p2">0</strong></span>
+          </div>
+          <div class="remaining">残りペア: <strong id="remaining-pairs">10</strong></div>
+        </header>
+
+        <section id="board" class="board" aria-label="カード一覧" aria-live="polite"></section>
+      </section>
+
+      <!-- Result Screen -->
+      <section id="result-screen" class="screen" aria-label="結果画面" hidden>
+        <h2 id="result-title" class="title"></h2>
+        <p class="result-scores">
+          <span>プレイヤー1: <strong id="final-p1">0</strong></span>
+          <span>プレイヤー2: <strong id="final-p2">0</strong></span>
+        </p>
+        <button id="restart-btn" class="btn primary" aria-label="もう一度">もう一度</button>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
