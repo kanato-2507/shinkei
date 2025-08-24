@@ -22,11 +22,7 @@
       <!-- Game Screen -->
       <section id="game-screen" class="screen" aria-label="ゲーム画面" hidden>
         <header class="hud" aria-live="polite">
-          <div class="turn">手番: <span id="current-player">プレイヤー1</span></div>
-          <div class="scores">
-            <span>プレイヤー1: <strong id="score-p1">0</strong></span>
-            <span>プレイヤー2: <strong id="score-p2">0</strong></span>
-          </div>
+          <div class="score">スコア: <strong id="score">0</strong></div>
           <div class="remaining">残りペア: <strong id="remaining-pairs">10</strong></div>
         </header>
 
@@ -35,10 +31,9 @@
 
       <!-- Result Screen -->
       <section id="result-screen" class="screen" aria-label="結果画面" hidden>
-        <h2 id="result-title" class="title"></h2>
+        <h2 id="result-title" class="title">クリア！</h2>
         <p class="result-scores">
-          <span>プレイヤー1: <strong id="final-p1">0</strong></span>
-          <span>プレイヤー2: <strong id="final-p2">0</strong></span>
+          <span>スコア: <strong id="final-score">0</strong></span>
         </p>
         <button id="restart-btn" class="btn primary" aria-label="もう一度">もう一度</button>
       </section>

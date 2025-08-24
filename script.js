@@ -28,22 +28,18 @@
   const restartBtn = document.getElementById('restart-btn');
 
   const boardEl = document.getElementById('board');
-  const currentPlayerEl = document.getElementById('current-player');
-  const scoreP1El = document.getElementById('score-p1');
-  const scoreP2El = document.getElementById('score-p2');
+  const scoreEl = document.getElementById('score');
   const remainingPairsEl = document.getElementById('remaining-pairs');
   const hudEl = document.querySelector('.hud');
 
   const resultTitleEl = document.getElementById('result-title');
-  const finalP1El = document.getElementById('final-p1');
-  const finalP2El = document.getElementById('final-p2');
+  const finalScoreEl = document.getElementById('final-score');
 
   // 状態
   let deck = []; // { id, key, matched, el }
   let flipped = []; // 要素参照 2枚まで
   let lock = false;
-  let scores = [0, 0];
-  let currentPlayer = 0; // 0: P1, 1: P2
+  let score = 0; // シングルプレイの合計スコア
   let remainingPairs = 10; // 10ペア
 
   // ユーティリティ
@@ -66,9 +62,7 @@
   }
 
   function updateHUD() {
-    currentPlayerEl.textContent = currentPlayer === 0 ? 'プレイヤー1' : 'プレイヤー2';
-    scoreP1El.textContent = String(scores[0]);
-    scoreP2El.textContent = String(scores[1]);
+    scoreEl.textContent = String(score);
     remainingPairsEl.textContent = String(remainingPairs);
   }
 
@@ -118,8 +112,7 @@
     deck = createDeck();
     flipped = [];
     lock = false;
-    scores = [0, 0];
-    currentPlayer = 0; // プレイヤー1先攻
+    score = 0;
     remainingPairs = 10;
     updateHUD();
   }
@@ -132,15 +125,8 @@
   }
 
   function endGame() {
-    finalP1El.textContent = String(scores[0]);
-    finalP2El.textContent = String(scores[1]);
-    if (scores[0] > scores[1]) {
-      resultTitleEl.textContent = '勝者: プレイヤー1';
-    } else if (scores[1] > scores[0]) {
-      resultTitleEl.textContent = '勝者: プレイヤー2';
-    } else {
-      resultTitleEl.textContent = '引き分け';
-    }
+    finalScoreEl.textContent = String(score);
+    resultTitleEl.textContent = 'クリア！';
     setScreen('result');
   }
 
@@ -175,7 +161,7 @@
       b.el.classList.add('matched');
 
       const point = currentPairPoint();
-      scores[currentPlayer] += point;
+      score += point;
       remainingPairs -= 1;
       updateHUD();
 
@@ -187,14 +173,12 @@
         setTimeout(endGame, 300);
       }
     } else {
-      // ミスマッチ → 1秒表示して伏せる → 手番交代
+      // ミスマッチ → 1秒表示して伏せる（手番交代は無し）
       setTimeout(() => {
         a.el.classList.remove('flipped');
         b.el.classList.remove('flipped');
         flipped = [];
-        // 手番交代
-        currentPlayer = currentPlayer === 0 ? 1 : 0;
-        updateHUD();
+        // シングルプレイなので手番は固定
         lock = false;
       }, FLIP_BACK_DELAY_MS);
     }

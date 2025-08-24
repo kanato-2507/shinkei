@@ -43,15 +43,14 @@ body {
 /* HUD */
 .hud {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 12px;
   margin: 6px 0 10px;
   font-size: 0.95rem;
 }
-.hud .scores { display: flex; gap: 16px; justify-content: center; }
+.hud .score { font-weight: 600; }
 .hud .remaining { text-align: right; color: var(--muted); }
-.hud .turn { font-weight: 600; }
 
 /* Board */
 .board {
